@@ -7,6 +7,7 @@
           <Modal 
           title="First modal"
           v-if="modalFirst" 
+          @close="modalFirst =! modalFirst"
           />
         </div>
       </section>

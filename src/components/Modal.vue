@@ -1,9 +1,9 @@
 <template>
-  <div class="modal__wrapper">
-    <div class="modal-content">
+  <div class="modal__wrapper" @click="$emit('close')"> 
+    <div class="modal-content" @click.stop="">
       <div class="modal-header">
         <span class="modal-title">{{ title }}</span>
-        <span class="button-close">×</span>
+        <span class="button-close" @click="$emit('close')">×</span>
       </div>
     </div>
   </div>
@@ -16,6 +16,12 @@ export default {
       type: String,
       required: true,
     },
+  },
+  mounted() {
+    // закрытие модалки по escape
+    document.body.addEventListener("keyup", (e) => {
+      if (e.key === 27) this.$emit("close");
+    });
   },
 };
 </script>
