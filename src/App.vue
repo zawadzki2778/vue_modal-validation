@@ -1,19 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="wrapper">
+    <div class="wrapper-container">
+      <section>
+        <div class="container">
+          <button class="btn btnPrimary" @click="modalFirst =! modalFirst">Show modal</button>
+          <Modal 
+          title="First modal"
+          v-if="modalFirst" 
+          />
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Modal from "@/components/Modal.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { Modal },
+  data() {
+    return {
+      modalFirst: false,
+    };
+  },
+};
 </script>
 
 <style>
