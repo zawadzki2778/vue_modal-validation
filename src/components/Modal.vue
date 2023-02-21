@@ -1,12 +1,17 @@
 <template>
-  <div class="modal__wrapper" @click="$emit('close')"> 
-    <div class="modal-content" @click.stop="">
-      <div class="modal-header">
-        <span class="modal-title">{{ title }}</span>
-        <span class="button-close" @click="$emit('close')">×</span>
+  <transition name="modal">
+    <div class="modal__wrapper" @click="$emit('close')">
+      <div class="modal-content" @click.stop="">
+        <div class="modal-header">
+          <span class="modal-title">{{ title }}</span>
+          <span class="button-close" @click="$emit('close')">×</span>
+        </div>
+        <div class="modal-body">
+          <slot name="body"></slot>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -27,6 +32,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* ------- animation -------- */
+.modal-enter, .modal-leave-active {
+  opacity: 0;
+}
+.modal-enter .modal-content,
+.modal-leave-active .modal-leave-active {
+  transform: scale(1.2);
+}
+/* ------ END animation ------ */
 .modal__wrapper {
   display: flex;
   justify-content: center;
@@ -65,6 +79,7 @@ export default {
   }
 }
 .modal-body {
-  text-align: center;
+  text-align: left;
 }
+
 </style>

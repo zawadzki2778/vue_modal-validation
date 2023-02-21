@@ -3,12 +3,20 @@
     <div class="wrapper-container">
       <section>
         <div class="container">
-          <button class="btn btnPrimary" @click="modalFirst =! modalFirst">Show modal</button>
-          <Modal 
-          title="First modal"
-          v-if="modalFirst" 
-          @close="modalFirst =! modalFirst"
-          />
+          <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
+            Show modal
+          </button>
+          <Modal
+            title="First modal" v-show="modalFirst" @close="modalFirst =!
+            modalFirst">
+            <div slot="body">
+              <p>Tipe text for my modal ;)</p>
+              <input type="text"/>
+              <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
+                Done
+              </button>
+            </div>
+          </Modal>
         </div>
       </section>
     </div>
