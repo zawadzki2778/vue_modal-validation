@@ -3,18 +3,44 @@
     <div class="wrapper-container">
       <section>
         <div class="container">
+          <!--********************* FIRST MODAL ************************-->
           <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
-            Show modal
+            Show FIRST modal
           </button>
           <Modal
-            title="First modal" v-show="modalFirst" @close="modalFirst =!
-            modalFirst">
+            title="First modal"
+            v-show="modalFirst"
+            @close="modalFirst = false"
+          >
             <div slot="body">
               <p>Tipe text for my modal ;)</p>
-              <input type="text"/>
+              <input type="text" />
               <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
                 Done
               </button>
+            </div>
+          </Modal>
+          <!--********************* SECOND MODAL ************************-->
+          <button
+            class="btn btnPrimary"
+            @click="modalSecond.show = !modalSecond.show"
+          >
+            Show SECOND modal FORM
+          </button>
+          <Modal
+            title="Second modal FORM"
+            v-show="modalSecond.show"
+            @close="modalSecond.show = false"
+          >
+            <div slot="body">
+              <form @submit.prevent="submitForm">
+                <!-- to no submit form -->
+                <label>Name:</label>
+                <input type="number" v-model="modalSecond.name" required />
+                <label>E-mail:</label>
+                <input type="email" v-model="modalSecond.email" />
+                <button class="btn btnPrimary">Submit form</button>
+              </form>
             </div>
           </Modal>
         </div>
@@ -31,7 +57,21 @@ export default {
   data() {
     return {
       modalFirst: false,
+      modalSecond: {
+        show: false,
+        name: "",
+        email: "",
+      },
     };
+  },
+  methods: {
+    submitForm() {
+      console.log({
+        name: this.modalSecond.name,
+        email: this.modalSecond.email,
+      });
+      this.modalSecond.name = this.modalSecond.email = "";
+    },
   },
 };
 </script>

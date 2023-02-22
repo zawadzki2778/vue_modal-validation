@@ -24,7 +24,7 @@ export default {
   },
   mounted() {
     // закрытие модалки по escape
-    document.body.addEventListener("keyup", (e) => {
+    document.body.addEventListener("key", (e) => {
       if (e.key === 27) this.$emit("close");
     });
   },
