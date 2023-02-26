@@ -20,6 +20,7 @@
               </button>
             </div>
           </Modal>
+
           <!--********************* SECOND MODAL ************************-->
           <button
             class="btn btnPrimary"
@@ -43,6 +44,18 @@
               </form>
             </div>
           </Modal>
+
+          <!--********************* THIRD MODAL ************************-->
+          <button
+            class="btn btnPrimary"
+            @click="modalValidate = !modalValidate"
+          >
+            Show THIRD modal VALIDATE
+          </button>
+          <ModalValidate
+            v-show="modalValidate"
+            @close="modalValidate = false"
+          />
         </div>
       </section>
     </div>
@@ -51,9 +64,10 @@
 
 <script>
 import Modal from "@/components/Modal.vue";
+import ModalValidate from "@/components/ModalValidate.vue";
 export default {
   name: "App",
-  components: { Modal },
+  components: { Modal, ModalValidate },
   data() {
     return {
       modalFirst: false,
@@ -62,6 +76,7 @@ export default {
         name: "",
         email: "",
       },
+      modalValidate: false,
     };
   },
   methods: {
@@ -85,4 +100,8 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.btn.btnPrimary {
+  margin-right: 20px;
+}
+
 </style>
