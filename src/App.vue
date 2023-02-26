@@ -100,8 +100,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.btn.btnPrimary {
+/* .btn.btnPrimary {
   margin-right: 20px;
-}
-
+} */
+/* .container {
+  display: flex;
+} */
 </style>
