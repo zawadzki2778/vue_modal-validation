@@ -7,6 +7,7 @@
           <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
             Show FIRST modal
           </button>
+          <!--emit 'close' принимаем в Modal-->
           <Modal
             title="First modal"
             v-show="modalFirst"
@@ -56,6 +57,18 @@
             v-show="modalValidate"
             @close="modalValidate = false"
           />
+
+          <!--********************* FORE MODAL ************************-->
+          <button
+            class="btn btnPrimary"
+            @click="modalValidatePassword = !modalValidatePassword"
+          >
+            Show VALIDATE PASSWORD
+          </button>
+          <ModalValidatePassword
+            v-show="modalValidatePassword"
+            @close="modalValidatePassword = false"
+          />
         </div>
       </section>
     </div>
@@ -65,9 +78,10 @@
 <script>
 import Modal from "@/components/Modal.vue";
 import ModalValidate from "@/components/ModalValidate.vue";
+import ModalValidatePassword from "./components/ModalValidatePassword.vue";
 export default {
   name: "App",
-  components: { Modal, ModalValidate },
+  components: { Modal, ModalValidate, ModalValidatePassword },
   data() {
     return {
       modalFirst: false,
@@ -77,6 +91,7 @@ export default {
         email: "",
       },
       modalValidate: false,
+      modalValidatePassword: false,
     };
   },
   methods: {
@@ -100,10 +115,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-/* .btn.btnPrimary {
+.btn.btnPrimary {
   margin-right: 20px;
-} */
-/* .container {
-  display: flex;
-} */
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <transition name="modal">
     <Modal title="THIRD modal VALIDATE" @close="$emit('close')">
       <div slot="body">
-        <form @submit.prevent="">
+        <form @submit.prevent="onSubmit">
           <!--*********************** NAME ***********************-->
           <div class="form-item" :class="{ errorInput: $v.name.$error }">
             <label>Name:</label>
@@ -12,9 +12,10 @@
               {{ $v.name.$params.minLength.min }} simbols
             </p>
             <input
+              type="number"
               v-model="name"
               :class="{ error: $v.name.$error }"
-              @change="$v.name.$touch()"
+              @keypress="$v.name.$touch()"
             />
           </div>
           <!--*********************** EMAIL ***********************-->
@@ -25,16 +26,17 @@
               E-mail is not correct
             </p>
             <input
+              type="email"
               v-model="email"
               :class="{ error: $v.email.$error }"
-              @change="$v.email.$touch()"
+              @keypress="$v.email.$touch()"
             />
           </div>
           <button class="btn btnPrimary">Submit form</button>
         </form>
       </div>
     </Modal>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -47,6 +49,7 @@ export default {
     return {
       name: "",
       email: "",
+      submitStatus: null,
     };
   },
   validations: {
@@ -57,6 +60,21 @@ export default {
     email: {
       required,
       email,
+    },
+  },
+  methods: {
+    onSubmit() {
+      this.$v.$touch();
+      if (!this.$v.invalid) {
+        const user = {
+          // условия чтобы не отправлялись пустые данные
+          name: this.name,
+          email: this.email,
+        };
+        console.log(user);
+        (this.name = ""), (this.email = ""), this.$v.$reset();
+        this.$emit("close");
+      }
     },
   },
 };
