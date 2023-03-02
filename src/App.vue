@@ -5,7 +5,7 @@
         <div class="container">
           <!--********************* FIRST MODAL ************************-->
           <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
-            Show FIRST modal
+            FIRST MODAL
           </button>
           <!--emit 'close' принимаем в Modal-->
           <Modal
@@ -15,10 +15,8 @@
           >
             <div slot="body">
               <p>Tipe text</p>
-              <input type="text" />
-              <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
-                Done
-              </button>
+              <input type="text" v-model="text" />
+              <button class="btn btnPrimary" @click="addText">Done</button>
             </div>
           </Modal>
 
@@ -27,7 +25,7 @@
             class="btn btnPrimary"
             @click="modalSecond.show = !modalSecond.show"
           >
-            Show SECOND modal FORM
+            SECOND MODAL
           </button>
           <Modal
             title="Second modal FORM"
@@ -46,24 +44,24 @@
             </div>
           </Modal>
 
-          <!--********************* THIRD MODAL ************************-->
+          <!--********************* VALIDATE NAME/EMAIL ************************-->
           <button
             class="btn btnPrimary"
             @click="modalValidate = !modalValidate"
           >
-            Show THIRD modal VALIDATE
+            VALIDATE NAME/EMAIL
           </button>
           <ModalValidate
             v-show="modalValidate"
             @close="modalValidate = false"
           />
 
-          <!--********************* FORE MODAL ************************-->
+          <!--*************VALIDATE NAME AND CONFIRM PASSWORD  *******************-->
           <button
             class="btn btnPrimary"
             @click="modalValidatePassword = !modalValidatePassword"
           >
-            Show VALIDATE PASSWORD
+            VALIDATE NAME AND CONFIRM PASSWORD
           </button>
           <ModalValidatePassword
             v-show="modalValidatePassword"
@@ -84,6 +82,7 @@ export default {
   components: { Modal, ModalValidate, ModalValidatePassword },
   data() {
     return {
+      text: "",
       modalFirst: false,
       modalSecond: {
         show: false,
@@ -95,6 +94,11 @@ export default {
     };
   },
   methods: {
+    addText() {
+      this.modalFirst = false;
+      this.text = "";
+      this.$emit("close");
+    },
     submitForm() {
       console.log({
         name: this.modalSecond.name,
@@ -114,6 +118,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
 }
 .btn.btnPrimary {
   margin-right: 20px;

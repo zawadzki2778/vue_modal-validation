@@ -7,6 +7,9 @@ import './assets/scss/main.scss'
 
 Vue.config.productionTip = false
 
+// import TreeView from "@/components/TreeView.vue";
+// Vue.component("tree-view", TreeView);
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
