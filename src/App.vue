@@ -14,7 +14,7 @@
             @close="modalFirst = false"
           >
             <div slot="body">
-              <p>Tipe text for my modal ;)</p>
+              <p>Tipe text</p>
               <input type="text" />
               <button class="btn btnPrimary" @click="modalFirst = !modalFirst">
                 Done

@@ -2,6 +2,7 @@
   <transition name="modal">
     <Modal title="VALIDATE PASSWORD" @close="$emit('close')">
       <div slot="body">
+        <!-- ********** Код из Vuelidate **************** -->
         <form @submit.prevent="submit">
           <div
             class="form-group"
@@ -15,7 +16,7 @@
             Name must have at least {{ $v.name.$params.minLength.min }} letters.
           </div>
           <button
-            class="button"
+            class="btn btnPrimary"
             type="submit"
             :disabled="submitStatus === 'PENDING'"
           >
@@ -29,6 +30,7 @@
           </p>
           <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
         </form>
+        <!-- ********************************************* -->
       </div>
     </Modal>
   </transition>
@@ -54,7 +56,6 @@ export default {
     },
   },
   methods: {
-    //
     submit() {
       console.log("submit!");
       this.$v.$touch();
@@ -63,16 +64,14 @@ export default {
       } else {
         // do your submit logic here
         this.submitStatus = "PENDING";
-        this.name = "";
-        this.$emit("close");
-        this.$v.$reset();
+        this.name = ""; // Очищаем инпут
+        this.$emit("close"); // Закрываем окно 
+        this.$v.$reset(); // Если форма отправлена успешно, она очищается
 
         setTimeout(() => {
           this.submitStatus = "OK";
-          // hide the "Thanks for your submission!" message after 3 seconds
-          setTimeout(() => {
-            this.submitStatus = null;
-          }, 3000);
+          // hide the "Thanks for your submission!" message 
+          this.submitStatus = null; //Если форма отправлена успешно, очишаем подсказки
         }, 500);
       }
     },
@@ -88,8 +87,4 @@ export default {
   font-size: 13.4px;
   color: firebrick;
 }
-
-// input.form__input {
-//   border-color: firebrick;
-// }
 </style>

@@ -12,7 +12,6 @@
               {{ $v.name.$params.minLength.min }} simbols
             </p>
             <input
-              type="number"
               v-model="name"
               :class="{ error: $v.name.$error }"
               @keypress="$v.name.$touch()"
