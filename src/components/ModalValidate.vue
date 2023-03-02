@@ -14,8 +14,9 @@
             <input
               v-model="name"
               :class="{ error: $v.name.$error }"
-              @keypress="$v.name.$touch()"
+              @change="$v.name.$touch()"
             />
+            <!-- @change запускает валидацию только после того, как пользователь закончил ввод и перешел к следующему полю или снял фокус с поля-->
           </div>
           <!--*********************** EMAIL ***********************-->
           <div class="form-item" :class="{ errorInput: $v.email.$error }">
@@ -30,6 +31,7 @@
               :class="{ error: $v.email.$error }"
               @keypress="$v.email.$touch()"
             />
+            <!-- @keypress запускает валидацию при каждом нажатии клавиши на клавиатуре -->
           </div>
           <button class="btn btnPrimary">Submit form</button>
         </form>
